@@ -12,7 +12,7 @@
     <?php
     $sql = "SELECT * FROM users";
 
-    $res = $conn->query($sql);
+    $res = mysqli_query($conn, $sql);
     $qtd = $res->num_rows;
 
     if ($qtd > 0) {

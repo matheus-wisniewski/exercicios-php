@@ -7,7 +7,7 @@ switch ($_REQUEST["acao"]) {
 
         $sql = "INSERT INTO users (nome, senha, email) VALUES ('{$usuario}', '{$senha}', '{$email}')";
 
-        $res = $conn->query($sql);
+        mysqli_query($conn, $sql);
 
         break;
     case 'editar':
