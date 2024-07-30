@@ -8,29 +8,27 @@
 </head>
 
 <body>
-    <?php
-    require_once "Classes.php";
+    <pre>
+        <?php
+        require_once "Classes.php";
 
-    $bic = new Caneta();
-    $bic->cor = "azul";
-    $bic->ponta = 0.5;
-    $bic->tampada = false;
-    #$bic->rabiscar();
+        $bic = new Caneta();
+        $bic->cor = "azul";
 
-    $novoBic = new Caneta();
-    $bicArr = [
-        'modelo' => $_REQUEST['modelo'],
-        'cor' => $_REQUEST['cor'],
-        'ponta' => $_REQUEST['ponta'],
-        'tampada' => $_REQUEST['tampada'],
-    ];
-    $novoBic->recebendoDados($bicArr);
+        $novoBic = new Caneta();
+        $bicArr = [
+            'modelo' => $_REQUEST['modelo'],
+            'cor' => $_REQUEST['cor'],
+            'ponta' => $_REQUEST['ponta'],
+            'tampada' => $_REQUEST['tampada'],
+        ];
+        $novoBic->recebendoDados($bicArr);
 
-    print_r($novoBic);
 
-    #print_r($bic);
-    ?>
-
+        print_r($novoBic);
+        print_r($novoBic->rabiscar());
+        ?>
+    </pre>
     <form action="<?= $_SERVER['PHP_SELF'] ?>">
         <label>Modelo<input type="text" name="modelo" value="<?= @$modelo ?>"></label>
         <label>Cor<input type="text" name="cor" value="<?= @$cor ?>"></label>

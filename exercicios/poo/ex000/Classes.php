@@ -1,26 +1,26 @@
 <?php
 class Caneta
 {
-    var $modelo;
-    var $cor;
-    var $ponta;
-    var $tampada;
+    public $modelo;
+    public $cor;
+    private $ponta;
+    protected $tampada;
 
-    function rabiscar()
+    public function rabiscar()
     {
-        if (!!$this->tampada) {
+        if ($this->tampada == true) {
             echo "<p>Destampe sua caneta antes de tentar rabiscar.</p>";
         } else {
             echo "<p>Estou rabiscando!</p>";
         }
     }
 
-    function tampar()
+    private function tampar()
     {
         $this->tampada = true;
     }
 
-    function destampar()
+    private function destampar()
     {
         $this->tampada = false;
     }
@@ -29,7 +29,7 @@ class Caneta
     {
         $this->modelo = $infoDaCaneta["modelo"];
         $this->cor = $infoDaCaneta["cor"];
-        $this->ponta = $infoDaCaneta["cor"];
-        $this->tampada = $infoDaCaneta["cor"];
+        $this->ponta = $infoDaCaneta["ponta"];
+        $this->tampada = $infoDaCaneta["tampada"];
     }
 }
