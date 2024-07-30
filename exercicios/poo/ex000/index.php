@@ -12,21 +12,27 @@
         <?php
         require_once "Classes.php";
 
-        $bic = new Caneta();
-        $bic->cor = "azul";
+        # Inserção única
+        #$bic = new Caneta('', '', '', '');
+        #$bic->cor = "azul";
+        #print_r($bic);
 
-        $novoBic = new Caneta();
-        $bicArr = [
-            'modelo' => $_REQUEST['modelo'],
-            'cor' => $_REQUEST['cor'],
-            'ponta' => $_REQUEST['ponta'],
-            'tampada' => $_REQUEST['tampada'],
-        ];
-        $novoBic->recebendoDados($bicArr);
+        # Inserção de Array
+        #$novoBic = new Caneta('', '', '', '');
+        #$bicArr = [
+        #   'modelo' => $_REQUEST['modelo'],
+        #  'cor' => $_REQUEST['cor'],
+        # 'ponta' => $_REQUEST['ponta'],
+        #'tampada' => $_REQUEST['tampada'],
+        #];
+        #$novoBic->recebendoDados($bicArr);
+        #print_r($novoBic);
+
+        # Inserção com Construtor
+        $terceiraCaneta = new Caneta('Bic', 'Azul', 1.0, true);
+        print_r($terceiraCaneta);
 
 
-        print_r($novoBic);
-        print_r($novoBic->rabiscar());
         ?>
     </pre>
     <form action="<?= $_SERVER['PHP_SELF'] ?>">
