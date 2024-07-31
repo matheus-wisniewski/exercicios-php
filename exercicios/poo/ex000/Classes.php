@@ -16,12 +16,10 @@ class Caneta
 
     public function rabiscar()
     {
-        if ($this->tampada == false) {
+        if ($this->tampada === 'não') {
             echo "<p>Estou rabiscando!</p>";
-            $this->tampar();
         } else {
             echo "<p>Destampe sua caneta antes de tentar rabiscar.</p>";
-            $this->destampar();
         }
     }
 
@@ -45,7 +43,7 @@ class Caneta
 
     function getPonta()
     {
-        echo "O valor do atributo privado é: " . $this->ponta . "<br>";
+        echo "O valor do atributo privado é: $this->ponta <br>";
     }
 
     function setPonta($valor)
