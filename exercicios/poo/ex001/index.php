@@ -12,23 +12,10 @@
         <?php
         include_once "Conta.php";
 
+        # Instancia o objeto Conta
         $contaUsuario = new Conta(123, 'corrente', 'Matheus', 5000, 'aberta');
-
-        print_r($contaUsuario);
-        $contaUsuario->getInfo('tipo');
-        echo "<br>";
-        $contaUsuario->depositar(2000);
-        $contaUsuario->getInfo('saldo');
-        echo "<br>";
-        $contaUsuario->sacar(1000);
-        $contaUsuario->getInfo('saldo');
-        echo "<br>";
-        $contaUsuario->pagarMensal(2000);
-        $contaUsuario->getInfo('saldo');
-        echo "<br>";
-
-        $contaUsuario->setInfo('dono', 'Thena');
-        $contaUsuario->getInfo('dono');
+        $contaUsuario->abrirConta('Corrente');
+        # Testes
         ?>
     </pre>
 </body>

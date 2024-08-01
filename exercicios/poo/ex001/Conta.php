@@ -2,7 +2,7 @@
 class Conta
 {
     public $numConta;
-    private $tipo;
+    protected $tipo;
     private $dono;
     private $saldo;
     private $status;
@@ -20,19 +20,19 @@ class Conta
     {
         switch ($info) {
             case 'tipo':
-                echo ("O tipo de conta é: $this->tipo");
+                echo "O tipo de conta é: $this->tipo";
                 break;
             case 'dono':
-                echo ("O dono da conta é: $this->dono");
+                echo "O dono da conta é: $this->dono";
                 break;
             case 'saldo':
-                echo ("O saldo da conta é: $this->saldo");
+                echo "O saldo da conta é: $this->saldo";
                 break;
             case 'status':
-                echo ("O status de conta é: $this->status");
+                echo "O status de conta é: $this->status";
                 break;
             default:
-                echo ("O número da conta é: $this->numConta");
+                echo "O número da conta é: $this->numConta";
                 break;
         }
     }
@@ -47,7 +47,7 @@ class Conta
                 $this->dono = $valor;
                 break;
             case 'saldo':
-                $this->saldo = $valor;
+                $this->saldo += $valor;
                 break;
             case 'status':
                 $this->status = $valor;
@@ -56,35 +56,61 @@ class Conta
                 $this->numConta = $valor;
                 break;
             default:
-                echo ('Tipo não reconhecido. Tente novamente!');
+                echo 'Tipo não reconhecido. Tente novamente!';
         }
     }
 
-    function abrirConta()
+    function abrirConta($tipo)
     {
-        $this->status = 'A conta foi aberta';
+        $this->status = 'Aberta';
+        switch ($tipo) {
+            case 'Corrente':
+                $this->saldo = 50;
+                break;
+            case 'Poupança':
+                $this->saldo = 150;
+                break;
+            default:
+                echo 'Tipo não reconhecido. Tente novamente!';
+                break;
+        }
     }
 
     function fecharConta()
     {
-        $this->status = 'A conta foi fechada.';
+        if ($this->getInfo('saldo') > 0) {
+            echo "Conta ainda com valor. Impossível encerrar.";
+        } elseif ($this->getInfo('saldo') < 0) {
+            echo "Conta está em débito. Impossível encerrar";
+        } else {
+            $this->setInfo('status', 'Fechada');
+        }
     }
 
     function depositar($valorADepositar)
     {
-        $this->saldo += $valorADepositar;
+        if ($this->getInfo('status') == 'Aberta') {
+            $this->setInfo('saldo', $valorADepositar);
+        }
         echo "R$ $valorADepositar depositado na conta com sucesso! <br>";
     }
 
     function sacar($valorASacar)
     {
-        $this->saldo -= $valorASacar;
-        echo "R$ $valorASacar retirado da conta com sucesso! <br>";
+        if ($this->getInfo('status') === 'Aberta') {
+            $this->saldo -= $valorASacar;
+            echo "R$ $valorASacar retirado da conta com sucesso! <br>";
+        }
     }
 
     function pagarMensal($valorAPagar)
     {
-        $this->saldo -= $valorAPagar;
-        echo ("Pagamento de R$ $valorAPagar realizado! <br>");
+        if ($this->getInfo('tipo') === 'Corrente') {
+            $this->saldo -= 12;
+            echo "Pagamento de R$ $valorAPagar realizado! <br>";
+        } elseif ($this->getInfo('tipo') === "Poupança") {
+            $this->saldo -= 20;
+            echo "Pagamento de R$ $valorAPagar realizado! <br>";
+        }
     }
 }
