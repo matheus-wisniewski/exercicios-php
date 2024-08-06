@@ -6,8 +6,8 @@ class Controle implements Controlador
 {
     # Atributos
     private $volume;
-    private $ligado;
-    private $tocando;
+    private bool $ligado;
+    private bool $tocando;
 
     # Construtor
     function __construct()
@@ -20,12 +20,27 @@ class Controle implements Controlador
     # Getter e Setters
     private function setVolume($novoVolume)
     {
-        $this->volume = $novoVolume;
+        if ($this->getLigar() !== true) {
+            echo "Impossível definir o volume, ligue o controle primeiro.";
+        };
+
+        if ($novoVolume < 0) {
+            echo "O novo volume não pode ser menor que 0.";
+        };
+
+        $this->setVolume($novoVolume);
+        echo "Volume: " . $this->getVolume();
     }
+
     private function getVolume()
     {
-        $this->volume;
+        if ($this->getLigar() !== true) {
+            echo "Impossível exibir o volume, ligue o controle primeiro.";
+        }
+
+        echo "Volume: " . $this->getVolume();
     }
+
     private function setLigar($novoLigar)
     {
         $this->ligado = $novoLigar;
