@@ -63,13 +63,21 @@ class Controle implements Controlador
         }
     }
 
+
     private function settocando($novoTocando)
     {
+        if ($this->getStatus() !== "Ligado.") {
+            echo "O rádio está desligado. Ligue antes de tocar.";
+        }
+
         $this->tocando = $novoTocando;
     }
 
     private function gettocando()
     {
+        if ($this->getStatus() !== "Ligado.") {
+            echo "O rádio está desligado. Ligue antes de tocar.";
+        }
         $this->tocando;
     }
 
