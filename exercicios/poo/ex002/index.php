@@ -20,7 +20,7 @@ class Controle implements Controlador
     # Getter e Setters
     private function setVolume($novoVolume)
     {
-        if ($this->getLigar() !== true) {
+        if ($this->getStatus() !== true) {
             echo "Impossível definir o volume, ligue o controle primeiro.";
         };
 
@@ -34,25 +34,40 @@ class Controle implements Controlador
 
     private function getVolume()
     {
-        if ($this->getLigar() !== true) {
+        if ($this->getStatus() !== true) {
             echo "Impossível exibir o volume, ligue o controle primeiro.";
         }
 
         echo "Volume: " . $this->getVolume();
     }
 
-    private function setLigar($novoLigar)
+    private function setStatus($novoStatus)
     {
-        $this->ligado = $novoLigar;
+        if ($novoStatus === 'Ligado') {
+            $this->ligado = true;
+        } elseif ($novoStatus === 'Desligado') {
+            $this->ligado = false;
+        } else {
+            echo "insira um valor válido!";
+        }
     }
-    private function getLigar()
+
+    private function getStatus()
     {
-        $this->ligado;
+        $status = $this->ligado;
+        if ($status === true) {
+            echo "Ligado.";
+        } else {
+            $status === false;
+            echo "Desligado.";
+        }
     }
+
     private function settocando($novoTocando)
     {
         $this->tocando = $novoTocando;
     }
+
     private function gettocando()
     {
         $this->tocando;
@@ -61,15 +76,15 @@ class Controle implements Controlador
     # Métodos Da Interface
     function ligar()
     {
-        $this->setLigar(true);
+        $this->setStatus(true);
     }
     function desligar()
     {
-        $this->setLigar(false);
+        $this->setStatus(false);
     }
     function abrirMenu()
     {
-        echo "<br>Está ligado?" . $this->getLigar();
+        echo "<br>Está ligado?" . $this->getStatus();
     }
     function fecharMenu()
     {
