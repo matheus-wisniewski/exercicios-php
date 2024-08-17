@@ -15,7 +15,7 @@ interface Controlador
 
     public function ligarMudo();
 
-    public function desligarMud();
+    public function desligarMudo();
 
     public function play();
 

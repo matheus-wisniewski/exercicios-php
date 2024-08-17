@@ -5,7 +5,7 @@ require_once "Controlador.php";
 class Controle implements Controlador
 {
     # Atributos
-    private $volume;
+    private $volume = 0;
     private bool $ligado;
     private bool $tocando;
 
@@ -18,27 +18,18 @@ class Controle implements Controlador
     }
 
     # Getter e Setters
-    private function setVolume($novoVolume)
+    private function setVolume($tipo)
     {
-        if ($this->getStatus() !== true) {
-            echo "Impossível definir o volume, ligue o controle primeiro.";
-        };
-
-        if ($novoVolume < 0) {
-            echo "O novo volume não pode ser menor que 0.";
-        };
-
-        $this->setVolume($novoVolume);
-        echo "Volume: " . $this->getVolume();
+        if ($tipo === "Aumentar") {
+            $this->getVolume() + 1;
+        } else if ($tipo === "Diminuir") {
+            $this->getVolume() - 1;
+        }
     }
 
     private function getVolume()
     {
-        if ($this->getStatus() !== true) {
-            echo "Impossível exibir o volume, ligue o controle primeiro.";
-        }
-
-        echo "Volume: " . $this->getVolume();
+        return $this->volume;
     }
 
     private function setStatus($novoStatus)
@@ -56,40 +47,38 @@ class Controle implements Controlador
     {
         $status = $this->ligado;
         if ($status === true) {
-            echo "Ligado.";
+            return "Ligado.";
         } else {
             $status === false;
-            echo "Desligado.";
+            return "Desligado.";
         }
     }
 
 
     private function settocando($novoTocando)
     {
-        if ($this->getStatus() !== "Ligado.") {
-            echo "O rádio está desligado. Ligue antes de tocar.";
-        }
-
         $this->tocando = $novoTocando;
     }
 
     private function gettocando()
     {
-        if ($this->getStatus() !== "Ligado.") {
-            echo "O rádio está desligado. Ligue antes de tocar.";
-        }
         $this->tocando;
     }
+
 
     # Métodos Da Interface
     function ligar()
     {
-        $this->setStatus(true);
+        $this->setStatus('Ligado');
+        echo "O aparelho foi ligado.";
     }
+
     function desligar()
     {
-        $this->setStatus(false);
+        $this->setStatus('Desligado');
+        echo "O aparelho foi desligado.";
     }
+
     function abrirMenu()
     {
         echo "<br>Está ligado?" . $this->getStatus();
@@ -97,18 +86,31 @@ class Controle implements Controlador
     function fecharMenu()
     {
     }
+
     function maisVolume()
     {
+        $this->setVolume('Aumentar');
+        echo "Volume: " . $this->getVolume();
     }
+
     function menosVolume()
     {
+        $this->setVolume('Diminuir');
+        echo "Volume: " . $this->getVolume();
     }
+
     function ligarMudo()
     {
+        $this->setVolume("Mutar");
+        echo "Volume: MUTADO";
     }
-    function desligarMud()
+
+    function desligarMudo()
     {
+        $valorVolume = $this->getVolume();
+        $this->setVolume($valorVolume);
     }
+
     function play()
     {
     }
