@@ -20,5 +20,23 @@ class Pessoa
         return $this->nome;
     }
 
-    public function setNome() {}
+    public function setNome($novoNome)
+    {
+        $this->nome = $novoNome;
+    }
+
+    public function getIdade()
+    {
+        return $this->idade;
+    }
+
+    public function setIdade($novaIdade)
+    {
+        $this->idade = $novaIdade;
+    }
+
+    public function getSexo()
+    {
+        return $this->sexo;
+    }
 }
